@@ -1,7 +1,7 @@
 module Lib where
 
-import           Data.Aeson.TH as Aeson
-import           Protolude
+import Data.Aeson.TH as Aeson
+import Protolude
 
 data Freeplay = Freeplay
   { freeplay :: !Bool
@@ -10,11 +10,12 @@ data Freeplay = Freeplay
   , site     :: !Text
   }
 
+$(Aeson.deriveJSON Aeson.defaultOptions ''Freeplay)
+
 data AuthRequest = AuthRequest
   { cmd        :: !Text
   , gameId     :: !Text
   , launchVars :: Freeplay
   }
 
-$(Aeson.deriveJSON Aeson.defaultOptions ''Freeplay)
 $(Aeson.deriveJSON Aeson.defaultOptions ''AuthRequest)
