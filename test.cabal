@@ -20,8 +20,15 @@ library
   build-depends:       base >= 4.7 && < 5
                      , protolude >= 0.1.6 && < 0.2
                      , aeson
+                     , directory
+                     , filepath
+                     , list-transformer
+                     , transformers
   default-language:    Haskell2010
-  default-extensions:  OverloadedStrings, NoImplicitPrelude, TemplateHaskell
+  default-extensions:  OverloadedStrings
+                     , NoImplicitPrelude
+                     , TemplateHaskell
+                     , ScopedTypeVariables
 
 test-suite test-test
   type:                exitcode-stdio-1.0
@@ -35,7 +42,9 @@ test-suite test-test
                      , aeson
   ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
   default-language:    Haskell2010
-  default-extensions:  OverloadedStrings, NoImplicitPrelude, TemplateHaskell
+  default-extensions:  OverloadedStrings
+                     , NoImplicitPrelude
+                     , TemplateHaskell
 
 source-repository head
   type:     git
