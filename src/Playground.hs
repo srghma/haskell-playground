@@ -1,6 +1,5 @@
 module Playground where
 
-import Control.Monad.Trans.List
 import Protolude
 import System.Directory
 import System.FilePath
