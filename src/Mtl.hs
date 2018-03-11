@@ -1,7 +1,9 @@
+-- https://ocharles.org.uk/blog/guest-posts/2014-12-15-deriving.html
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
 module Mtl where
 
@@ -9,19 +11,35 @@ import           Protolude
 import qualified Data.Text as Text
 import           Control.Monad.Trans.Maybe
 
-rightPassword :: Text
-rightPassword = "secret"
+data AppConfig = AppConfig { rightPassword :: Text }
 
-isValid :: Text -> Bool
-isValid = (==) rightPassword
+newtype App m a = App { unApp :: ReaderT AppConfig m a }
+  deriving (
+    Functor,
+    Applicative,
+    Alternative,
+    Monad,
+    MonadPlus,
+    MonadReader AppConfig,
+    MonadState s,
+    MonadError e
+  )
 
-getPassphrase :: MaybeT IO Text
-getPassphrase = do s <- lift getLine
-                   guard (isValid s) -- Alternative provides guard.
-                   return s
+isValid :: Monad m => Text -> App m Bool
+isValid v =
+  do
+    p <- asks rightPassword
+    return (v == p)
 
-askPassphrase :: MaybeT IO ()
-askPassphrase = do lift $ putStrLn ( "Insert your new passphrase:" :: Text )
-                   value <- getPassphrase
-                   lift $ putStrLn ( "Storing in database..." :: Text)
+-- getPassphrase =
+--   do log "Asking passphrase"
+--      putText "Enter your passphrase:"
+--      value <- getLine
+--      log $ "Passphrase was: " <> value
+--      guard $ isValid value
+--      return value
+
+-- askPassphrase =
+--   do value <- msum $ repeat getPassphrase
+--      putText "Storing in database..."
 
