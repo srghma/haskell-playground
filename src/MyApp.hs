@@ -5,7 +5,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
-module Mtl where
+module MyApp where
 
 import           Protolude
 import qualified Data.Text as Text
@@ -20,6 +20,8 @@ newtype App m a = App { unApp :: ReaderT AppConfig m a }
     Alternative,
     Monad,
     MonadPlus,
+    -- MonadTrans,
+    MonadIO,
     MonadReader AppConfig,
     MonadState s,
     MonadError e
@@ -31,13 +33,11 @@ isValid v =
     p <- asks rightPassword
     return (v == p)
 
--- getPassphrase =
---   do log "Asking passphrase"
---      putText "Enter your passphrase:"
---      value <- getLine
---      log $ "Passphrase was: " <> value
---      guard $ isValid value
---      return value
+getPassphrase :: App IO Text
+getPassphrase =
+  do lift $ putText "Enter your passphrase:"
+     guard $ undefined
+     return "asdf"
 
 -- askPassphrase =
 --   do value <- msum $ repeat getPassphrase
