@@ -11,7 +11,7 @@
 }:
 
 let
-  hie = (pkgs.callPackage ./nix/pkgs/hie-nix {}).hie82;
+  hie = (pkgs.callPackage ./nix/pkgs/hie-nix {}).hie84;
   gitignore = pkgs.callPackage ./nix/pkgs/nix-gitignore {};
 
   haskellPackages = if compiler == "default"
@@ -20,10 +20,11 @@ let
 
   drv =
     let
-      src = gitignore.gitignoreSourcePure ''
-        **/**
-        !*.cabal
-      '' ./.;
+      filter = path: type:
+        type == "regular" &&
+        pkgs.lib.hasSuffix ".cabal" path;
+
+      src = builtins.filterSource filter ./.;
 
       package = haskellPackages.callCabal2nix "app" src {};
     in package;
