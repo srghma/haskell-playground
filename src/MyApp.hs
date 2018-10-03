@@ -1,7 +1,4 @@
 -- https://ocharles.org.uk/blog/guest-posts/2014-12-15-deriving.html
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
@@ -11,7 +8,7 @@ import           Protolude
 import qualified Data.Text as Text
 import           Control.Monad.Trans.Maybe
 
-data AppConfig = AppConfig { rightPassword :: Text }
+newtype AppConfig = AppConfig { rightPassword :: Text }
 
 newtype App m a = App { unApp :: ReaderT AppConfig m a }
   deriving (

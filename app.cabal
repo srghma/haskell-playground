@@ -53,8 +53,17 @@ executable haskell-test
   -- Modules included in this executable, other than Main.
   -- other-modules:
 
+  ghc-options:         -Wall -Werror -fwarn-incomplete-uni-patterns -threaded -rtsopts -with-rtsopts=-N
+
   -- LANGUAGE extensions used by modules in this package.
-  other-extensions:    OverloadedStrings, NoImplicitPrelude, TemplateHaskell, ScopedTypeVariables, GeneralizedNewtypeDeriving
+  other-extensions:    OverloadedStrings
+                     , NoImplicitPrelude
+                     , TemplateHaskell
+                     , ScopedTypeVariables
+                     , GeneralizedNewtypeDeriving
+
+  default-extensions:   NoImplicitPrelude
+                      , OverloadedStrings
 
   -- Other library packages from which modules are imported.
   build-depends:       classy-prelude

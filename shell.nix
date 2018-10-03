@@ -1,19 +1,18 @@
 {
   nixpkgs ? import ./nix/nixpkgs,
+
   pkgs ?
     let
       config = { allowUnfree = true; };
+      overlay = import ./nix/pkgs/overlay.nix;
     in
-      import nixpkgs { inherit config; },
+      import nixpkgs { inherit config; overlays = [ overlay ]; },
 
   compiler ? "default",
   doBenchmark ? false,
 }:
 
 let
-  hie = (pkgs.callPackage ./nix/pkgs/hie-nix {}).hie84;
-  gitignore = pkgs.callPackage ./nix/pkgs/nix-gitignore {};
-
   haskellPackages = if compiler == "default"
                        then pkgs.haskellPackages
                        else pkgs.haskell.packages.${compiler};
@@ -23,7 +22,7 @@ let
   env = pkgs.lib.overrideDerivation drv.env (oldAttrs: {
     buildInputs =
       oldAttrs.buildInputs ++
-      (with pkgs; [ git watchexec hie ]) ++
+      (with pkgs; [ git watchexec hies.hie84 ]) ++
       (with haskellPackages; [ cabal-install hlint hindent stylish-haskell ]);
 
     NIX_PATH = pkgs.lib.concatStringsSep ":" [
