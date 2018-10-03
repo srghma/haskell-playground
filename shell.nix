@@ -18,16 +18,7 @@ let
                        then pkgs.haskellPackages
                        else pkgs.haskell.packages.${compiler};
 
-  drv =
-    let
-      filter = path: type:
-        type == "regular" &&
-        pkgs.lib.hasSuffix ".cabal" path;
-
-      src = builtins.filterSource filter ./.;
-
-      package = haskellPackages.callCabal2nix "app" src {};
-    in package;
+  drv = haskellPackages.callCabal2nix "app" ./app.cabal {};
 
   env = pkgs.lib.overrideDerivation drv.env (oldAttrs: {
     buildInputs =
