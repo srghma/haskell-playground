@@ -1,6 +1,6 @@
 module Main where
 
-import           ClassyPrelude
+import Protolude
 import Control.Monad.Writer
 
 -- writer1 - log
@@ -28,7 +28,6 @@ program =
     lift . lift $ tell [1.0]
     lift $ tell [1]
     tell "test"
-    pass (WriterT . WriterT . WriterT . Identity $ (((((), const "gg"), "5"), [5]), [5.0]))
     return ()
 
 interpret :: Computation a -> ([Integer], [Double], Text)

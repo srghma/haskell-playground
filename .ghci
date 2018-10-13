@@ -1,5 +1,8 @@
+-- ghc-options
 :set -Wall
 :set -Wno-type-defaults
+
+-- default-extensions
 :set -XFlexibleContexts
 :set -XFlexibleInstances
 :set -XLambdaCase
@@ -12,5 +15,16 @@
 :set -XTypeFamilies
 :set -XTypeSynonymInstances
 :set -XViewPatterns
-import ClassyPrelude
+
+-- default prompt
+:set prompt "\ESC[1;34m\STXλ> \ESC[0m\STX"
+
+-- prompt for multiline code
+:set prompt-cont "\ESC[1;34m\STX~> \ESC[0m\STX"
+
+-- enable multiline commands without :{ mycode :}
+:set +m
+
+-- imports
+import Protolude
 import qualified Data.Text as T
