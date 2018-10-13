@@ -11,6 +11,7 @@ program1 = WriterT (Identity ((), ""))
 
 program12 :: WriterT Integer Identity ()
 program12 = WriterT (Identity ((), 1))
+-- program12 = return () -- we could make like this if Integer had instance of monoid
 
 type Computation = WriterT Text (WriterT [Integer] (Writer [Double]))
 
