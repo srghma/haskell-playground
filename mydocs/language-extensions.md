@@ -47,13 +47,14 @@ instance VarMonad (ST s) (STRef s) where ...
 
 - FunctionalDependencies - Naive use of MPTCs may result in ambiguity, so functional dependencies were developed as a method of resolving that ambiguity, declaring that some subset of the parameters is sufficient to determine the values of the others
 
+- ExistentialQuantification - TODO: https://downloads.haskell.org/~ghc/7.8.3/docs/html/users_guide/data-type-extensions.html#existential-quantification
+
 BangPatterns
 BinaryLiterals
 ConstraintKinds
 DefaultSignatures
 DoAndIfThenElse
 EmptyDataDecls
-ExistentialQuantification
 FlexibleContexts
 FlexibleInstances
 GADTs
