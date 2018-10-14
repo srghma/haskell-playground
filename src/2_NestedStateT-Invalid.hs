@@ -2,14 +2,14 @@
 
 module Main where
 
-import Protolude
-import Control.Monad.State ()
+import           Control.Monad.State            ( )
+import           Protolude
 
 program1 :: State Text ()
-program1 = state ((),)
+program1 = state ((), )
 
 program1' :: State a ()
-program1' = state ((),)
+program1' = state ((), )
 
 program2 :: State Text (State Double ())
 program2 = state (\text -> (state (\double -> ((), double)), text))
@@ -20,7 +20,7 @@ program2 = state (\text -> (state (\double -> ((), double)), text))
 type Computation a = State Text (State Int (State Double a))
 
 program3 :: Computation ()
-program3 = state (state (state ((),),),)
+program3 = state (state (state ((), ), ), )
 
 -- return' :: a -> StateT b Identity a
 -- return' a = state (a,)
@@ -48,10 +48,9 @@ program = do
 
 interpret :: Computation a -> (Int, Double, Text)
 interpret c =
-    let (c', text) = runState c "first"
-    in let (c'', int) = runState c' 999
-    in let (_ignored_a, double) = runState c'' 999.0
-    in (int, double, text)
+  let (c', text) = runState c "first"
+  in  let (c'', int) = runState c' 999
+      in  let (_ignored_a, double) = runState c'' 999.0 in (int, double, text)
 
 main :: IO ()
 main = print (interpret program)

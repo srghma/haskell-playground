@@ -29,7 +29,7 @@ TODO: continue
 
 - UndecidableInstances (maybe unsafe!!!) - by default right instance - if all of the parameters of the typeclass get smaller as you walk backwards into the instance dependencies, but with `UndecidableInstances` ........................
 
-TODO: https://www.reddit.com/r/haskell/comments/5zjwym/when_is_undecidableinstances_okay_to_use/deynhlx/
+TODO: (read)[https://www.reddit.com/r/haskell/comments/5zjwym/when_is_undecidableinstances_okay_to_use/deynhlx/]
 
 # Other
 
@@ -72,6 +72,8 @@ ScopedTypeVariables
 TypeSynonymInstances
 ViewPatterns
 
+TypeApplication (maybe unsafe!!!) - allows to specify type `read @Int "3"`
+
 # Derive
 DeriveDataTypeable
 DeriveFoldable
@@ -81,4 +83,3 @@ DeriveTraversable
 GeneralizedNewtypeDeriving
 AutoDeriveTypeable
 StandaloneDeriving
-

@@ -5,7 +5,7 @@
 module MyApp where
 
 import           Protolude
-import qualified Data.Text as Text
+import qualified Data.Text                     as Text
 import           Control.Monad.Trans.Maybe
 
 newtype AppConfig = AppConfig { rightPassword :: Text }
@@ -25,16 +25,15 @@ newtype App m a = App { unApp :: ReaderT AppConfig m a }
   )
 
 isValid :: Monad m => Text -> App m Bool
-isValid v =
-  do
-    p <- asks rightPassword
-    return (v == p)
+isValid v = do
+  p <- asks rightPassword
+  return (v == p)
 
 getPassphrase :: App IO Text
-getPassphrase =
-  do lift $ putText "Enter your passphrase:"
-     guard $ undefined
-     return "asdf"
+getPassphrase = do
+  lift $ putText "Enter your passphrase:"
+  guard $ undefined
+  return "asdf"
 
 -- askPassphrase =
 --   do value <- msum $ repeat getPassphrase

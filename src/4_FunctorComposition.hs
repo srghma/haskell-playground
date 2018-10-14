@@ -6,7 +6,7 @@
 
 module Main where
 
-import Protolude
+import           Protolude
 
 -- I can't use `type` here, because type synonyms cannot be partially applied
 --

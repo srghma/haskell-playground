@@ -1,7 +1,7 @@
 module Main where
 
+import           Control.Monad.State            ( )
 import           Protolude
-import           Control.Monad.State ()
 
 program2 :: StateT Text (State Double) ()
 -- program2 = state (\text -> ((), text))
@@ -21,8 +21,9 @@ program = do
 
 interpret :: Computation a -> (Text, Int, Double)
 interpret c =
-    let (Identity (((_, text), int), double)) = runStateT (runStateT (runStateT c "first") 1) 1.0
-    in (text, int, double)
+  let (Identity (((_, text), int), double)) =
+        runStateT (runStateT (runStateT c "first") 1) 1.0
+  in  (text, int, double)
 
 main :: IO ()
 main = print (interpret program)

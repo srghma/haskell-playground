@@ -11,7 +11,7 @@ extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
 executable haskell-test
-  main-is:             NestedStateT.hs
+  main-is:             8_ExtensibleEffects.hs
 
   -- recommendations from https://github.com/commercialhaskell/rio#ghc-options
 
@@ -43,6 +43,9 @@ executable haskell-test
                      , mtl
                      , hspec
                      , hspec-core
+                     , extensible-effects
+                     , free
+                     , random
 
   hs-source-dirs:      src
 
