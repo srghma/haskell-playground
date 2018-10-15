@@ -2,7 +2,7 @@ Extensions from https://github.com/commercialhaskell/rio#language-extensions
 
 # common
 
-RankNTypes - allow use forall
+RankNTypes - allow to use forall within forall, e.g. `forall a. a -> (forall b. b -> a)`
 
 TupleSections - allow use (,,, )
 
@@ -49,13 +49,26 @@ instance VarMonad (ST s) (STRef s) where ...
 
 - ExistentialQuantification - TODO: https://downloads.haskell.org/~ghc/7.8.3/docs/html/users_guide/data-type-extensions.html#existential-quantification
 
+FlexibleContexts - allows to have any type inside a typeclass
+
+```hs
+-- by default you can only
+
+add :: Num a => a -> a
+add = (+)
+
+-- but with FlexibleContexts
+
+intAdd :: Num Int => Int -> Int
+intAdd = (+)
+```
+
 BangPatterns
 BinaryLiterals
 ConstraintKinds
 DefaultSignatures
 DoAndIfThenElse
 EmptyDataDecls
-FlexibleContexts
 FlexibleInstances
 GADTs
 InstanceSigs
