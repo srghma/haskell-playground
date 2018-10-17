@@ -11,13 +11,8 @@ extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
 executable haskell-test
-  main-is:             8_ExtensibleEffects.hs
+  main-is:             9_InstanceResolution.hs
 
-  -- recommendations from https://github.com/commercialhaskell/rio#ghc-options
-
-  -- -Wall -- Turns on all warning options that indicate potentially suspicious code
-  -- -Wincomplete-record-updates -- like disallow non-total functions
-  -- -Wincomplete-uni-patterns -- warns about places where a pattern-match might fail at runtime, only to lambda-expressions
   ghc-options:         -Wall
                        -Wcompat
                        -Wincomplete-record-updates
@@ -40,6 +35,7 @@ executable haskell-test
                       , OverloadedStrings
 
   build-depends:       protolude
+                     , base
                      , mtl
                      , hspec
                      , hspec-core
@@ -50,4 +46,3 @@ executable haskell-test
   hs-source-dirs:      src
 
   default-language:    Haskell2010
-

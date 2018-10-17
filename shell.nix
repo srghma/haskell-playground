@@ -13,9 +13,7 @@
 }:
 
 let
-  haskellPackages = if compiler == "default"
-                       then pkgs.haskellPackages
-                       else pkgs.haskell.packages.${compiler};
+  haskellPackages = pkgs.haskell.packages.ghc843;
 
   drv = haskellPackages.callCabal2nix "app" ./app.cabal {};
 
@@ -23,7 +21,7 @@ let
     buildInputs =
       oldAttrs.buildInputs ++
       (with pkgs; [ git watchexec hies.hie84 ]) ++
-      (with haskellPackages; [ cabal-install hlint hindent stylish-haskell ]);
+      (with haskellPackages; [ cabal2nix cabal-install hlint hindent stylish-haskell hpack brittany ]);
 
     NIX_PATH = pkgs.lib.concatStringsSep ":" [
       "nixpkgs=${nixpkgs}"
