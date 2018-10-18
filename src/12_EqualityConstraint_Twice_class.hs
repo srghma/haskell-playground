@@ -1,11 +1,11 @@
-{-# LANGUAGE FlexibleInstances, TypeFamilies #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE TypeFamilies      #-}
 
 module Main where
 
-import Protolude
+import           Protolude
 
 -- https://stackoverflow.com/a/11554793/3574379
-
 class Twice1 f where
   twice1 :: f -> f
 
@@ -27,8 +27,12 @@ instance Example Int where
 instance Example Char where
   transform _ = 'x'
 
-apply1 = twice1 transform
--- apply2 = twice2 transform
+-- raise error ambiguous type
+-- apply1 :: Int -> Int -- add this line to resolve error
+-- apply1 = twice1 transform
+
+-- derives type apply2 :: Int -> Int automatically
+apply2 = twice2 transform
 
 main :: IO ()
 main = return ()
