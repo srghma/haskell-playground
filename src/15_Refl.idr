@@ -15,6 +15,9 @@ fiveIsFive = Refl
 twoPlusTwo : 2 + 2 = 4
 twoPlusTwo = Refl
 
+-- twoPlusTwo : 2 + 2 = 5 -- raise error
+-- twoPlusTwo = Refl
+
 --- (=) defined ourselves
 
 using (a : Type, b : Type, x : a)
@@ -28,3 +31,10 @@ using (a : Type, b : Type, x : a)
 
 twoPlusTwo' : 2 + 2 `Equus` 4
 twoPlusTwo' = EqRefl
+
+
+heterogeneous : 2 + 2 ~=~ 4
+heterogeneous = Refl
+
+-- heterogeneous : 2 + 2 ~=~ 5 -- raise error
+-- heterogeneous = Refl

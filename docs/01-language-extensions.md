@@ -8,7 +8,12 @@ TupleSections - allow use (,,, )
 
 # for https://hackage.haskell.org/package/first-class-families (e.g. allows to compose functors without newtype)
 
-- DataKinds - user defined kinds through datatype promotion
+- DataKinds - user defined kinds through datatype promotion, allows
+
+```hs
+hetero :: '[] :~~: '[]
+hetero = HRefl
+```
 
 - PolyKinds - enables kind polymorphism
 
